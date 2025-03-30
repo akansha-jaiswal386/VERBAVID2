@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -25,21 +25,24 @@ export default function HomePage() {
   }, [charIndex, index, texts]);
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-center items-center bg-black overflow-hidden">
-      {/* Animated Background */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-black opacity-30"
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-      />
+    <div className="relative w-full min-h-screen flex flex-col justify-center items-center bg-black ">
       
-      <motion.div 
-        className="absolute inset-0 flex justify-center items-center opacity-20"
-        animate={{ rotate: [0, 360] }}
-        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-      >
-        <div className="w-96 h-96 bg-emerald-500 rounded-full blur-3xl"></div>
-      </motion.div>
+      {/* Background Effects - Wrap Inside a Div with Limited Height */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+        <motion.div 
+          className="w-full h-full bg-gradient-to-r from-emerald-600 to-black opacity-30"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+        />
+        
+        <motion.div 
+          className="absolute inset-0 flex justify-center items-center opacity-20"
+          animate={{ rotate: [0, 360] }}
+          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+        >
+          <div className="w-96 h-96 bg-emerald-500 rounded-full blur-3xl"></div>
+        </motion.div>
+      </div>
       
       {/* Main Content */}
       <div className="relative text-center text-white z-10">
@@ -49,6 +52,9 @@ export default function HomePage() {
           Get Started
         </button>
       </div>
+      
+      {/* Ensure Next Component Doesn't Overlap Blur */}
+      <div className="relative w-full h-0"></div>
     </div>
   );
 }
